@@ -274,6 +274,8 @@ a:hover {
   height: auto;
   display: block;
   box-sizing: border-box;
+  filter: none;
+  transform: none;
 }
 
 .navbarwhite {
