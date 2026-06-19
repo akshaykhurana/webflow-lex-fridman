@@ -64,9 +64,44 @@ Each episode has a designed detail page linked from the **DETAILS** button on th
 
 ## Cloudflare Pages
 
+### 1. Create the project (dashboard)
+
+1. Go to [Cloudflare Dashboard](https://dash.cloudflare.com) → **Workers & Pages** → **Create**
+2. Choose **Pages** → **Connect to Git**
+3. Authorize GitHub if prompted, then select **`akshaykhurana/webflow-lex-fridman`**
+4. Configure build settings:
+
 | Setting | Value |
 |---|---|
+| Production branch | `master` |
 | Build command | `npm run build` |
-| Output directory | `dist` |
+| Build output directory | `dist` |
+| Root directory | `/` (leave default) |
+
+5. Under **Environment variables**, none are required.
+6. Click **Save and Deploy**
+
+Cloudflare will run `npm install` then `npm run build`. The build downloads research thumbnails from the Webflow CDN, so network access during build is required (enabled by default).
+
+### 2. After deploy
+
+Your site will be live at `https://webflow-lex-fridman.pages.dev` (or similar).
+
+Test these URLs:
+- `/` — home
+- `/podcast` — podcast list
+- `/podcast/100` — sample detail page
+- `/research` — research list
+- `/deep-learning` — teaching videos
 
 Clean URL rewrites are included via `dist/_redirects` (copied from `src/_redirects` at build time). Podcast detail URLs work as static files without extra rules.
+
+### 3. Custom domain (optional)
+
+In the Pages project → **Custom domains** → add your domain. Cloudflare provides free SSL.
+
+### Troubleshooting
+
+- **Build fails on `fetch` for images** — ensure the build environment has network access (default on Cloudflare Pages).
+- **404 on `/podcast`** — confirm `_redirects` is in `dist/` after build (generated automatically).
+- **Node version mismatch** — `.node-version` pins Node 20.
