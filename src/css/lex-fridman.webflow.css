@@ -77,10 +77,6 @@ a:hover {
   overflow: hidden;
 }
 
-.sectionhero:hover {
-  filter: grayscale(0%);
-}
-
 .headinghomehero {
   color: var(--text-black);
   letter-spacing: 2px;
@@ -272,9 +268,12 @@ a:hover {
 
 .imagepicture {
   box-shadow: 0 4px 16px 0 var(--shadows-dark);
-  filter: grayscale();
   border-radius: 0%;
   padding: 16px;
+  width: 100%;
+  height: auto;
+  display: block;
+  box-sizing: border-box;
 }
 
 .navbarwhite {
@@ -687,7 +686,7 @@ a:hover {
   }
 
   .imagepicture {
-    filter: grayscale(0%);
+    width: 100%;
   }
 
   .navmenus {
@@ -761,7 +760,7 @@ a:hover {
   }
 
   .imagepicture {
-    width: 160px;
+    width: 100%;
   }
 
   .sectionvideointro {
@@ -812,6 +811,11 @@ a:hover {
   .headingvideocategories {
     font-weight: 300;
   }
+}
+
+#w-node-_17e9cafa-1ffd-fa56-f763-e33cf6904749-ace43f9e {
+  min-width: 0;
+  width: 100%;
 }
 
 #w-node-_3faed768-22dd-93cc-ccaf-00fca7b5e846-ace43f9e {

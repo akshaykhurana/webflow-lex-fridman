@@ -54,8 +54,7 @@ Each episode has a designed detail page linked from the **DETAILS** button on th
 ```
 ├── data/           # Webflow CMS CSV exports
 ├── src/            # HTML templates and assets
-│   ├── templates/podcast-detail.html
-│   └── _redirects  # Cloudflare Pages clean URLs
+│   └── templates/podcast-detail.html
 ├── scripts/
 │   ├── build.mjs
 │   └── verify-links.mjs
@@ -85,12 +84,12 @@ Your site will be live at `https://webflow-lex-fridman.<your-subdomain>.workers.
 
 Test these URLs:
 - `/` — home
-- `/podcast` — podcast list (via `_redirects`)
+- `/podcast` — podcast list
 - `/podcast/100` — sample detail page
 - `/research` — research list
 - `/deep-learning` — teaching videos
 
-Clean URL rewrites are in `src/_redirects` and copied to `dist/_redirects` at build time.
+Cloudflare Workers serves extensionless URLs automatically (e.g. `podcast.html` → `/podcast`).
 
 ### Custom domain (optional)
 

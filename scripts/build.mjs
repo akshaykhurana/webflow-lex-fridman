@@ -270,8 +270,6 @@ function copyStaticAssets() {
     const html = readFileSync(join(DIST, page), 'utf8');
     writePage(join(DIST, page), html);
   }
-
-  cpSync(join(SRC, '_redirects'), join(DIST, '_redirects'));
 }
 
 async function main() {
