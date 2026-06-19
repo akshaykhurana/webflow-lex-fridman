@@ -99,4 +99,4 @@ Application → **Settings** → **Domains & routes** → add your domain.
 
 - **Deploy fails: no entry point** — confirm `wrangler.jsonc` is committed and `assets.directory` is `./dist`.
 - **Build fails on image download** — build needs network access (default on Cloudflare).
-- **Node version** — `.node-version` pins Node 20.
+- **Node version** — `.node-version` pins Node 22 (required by Wrangler 4.x).
