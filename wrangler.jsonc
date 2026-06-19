@@ -1,6 +1,7 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "webflow-lex-fridman",
+  "account_id": "2a136d265eb4cedf2ff60ac20c25085e",
   "compatibility_date": "2026-06-19",
   "assets": {
     "directory": "./dist",
