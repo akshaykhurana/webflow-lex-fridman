@@ -62,46 +62,42 @@ Each episode has a designed detail page linked from the **DETAILS** button on th
 └── dist/           # build output (deploy this)
 ```
 
-## Cloudflare Pages
+## Cloudflare (Applications / Workers)
 
-### 1. Create the project (dashboard)
+Cloudflare now deploys static sites via **Workers & Pages → Create application → Connect Git**, not the old standalone Pages flow.
 
-1. Go to [Cloudflare Dashboard](https://dash.cloudflare.com) → **Workers & Pages** → **Create**
-2. Choose **Pages** → **Connect to Git**
-3. Authorize GitHub if prompted, then select **`akshaykhurana/webflow-lex-fridman`**
-4. Configure build settings:
+### Dashboard settings
+
+Use these values on the **Set up your application** screen:
 
 | Setting | Value |
 |---|---|
-| Production branch | `master` |
+| Repository | `akshaykhurana/webflow-lex-fridman` |
+| Project name | `webflow-lex-fridman` (must match `name` in `wrangler.jsonc`) |
 | Build command | `npm run build` |
-| Build output directory | `dist` |
-| Root directory | `/` (leave default) |
+| Deploy command | `npx wrangler deploy` |
 
-5. Under **Environment variables**, none are required.
-6. Click **Save and Deploy**
+The repo includes [`wrangler.jsonc`](wrangler.jsonc), which tells Wrangler to upload `./dist` as static assets after the build step. Without this file, `npx wrangler deploy` will fail looking for Worker script entry point.
 
-Cloudflare will run `npm install` then `npm run build`. The build downloads research thumbnails from the Webflow CDN, so network access during build is required (enabled by default).
+### After deploy
 
-### 2. After deploy
-
-Your site will be live at `https://webflow-lex-fridman.pages.dev` (or similar).
+Your site will be live at `https://webflow-lex-fridman.<your-subdomain>.workers.dev` (or a custom domain if configured).
 
 Test these URLs:
 - `/` — home
-- `/podcast` — podcast list
+- `/podcast` — podcast list (via `_redirects`)
 - `/podcast/100` — sample detail page
 - `/research` — research list
 - `/deep-learning` — teaching videos
 
-Clean URL rewrites are included via `dist/_redirects` (copied from `src/_redirects` at build time). Podcast detail URLs work as static files without extra rules.
+Clean URL rewrites are in `src/_redirects` and copied to `dist/_redirects` at build time.
 
-### 3. Custom domain (optional)
+### Custom domain (optional)
 
-In the Pages project → **Custom domains** → add your domain. Cloudflare provides free SSL.
+Application → **Settings** → **Domains & routes** → add your domain.
 
 ### Troubleshooting
 
-- **Build fails on `fetch` for images** — ensure the build environment has network access (default on Cloudflare Pages).
-- **404 on `/podcast`** — confirm `_redirects` is in `dist/` after build (generated automatically).
-- **Node version mismatch** — `.node-version` pins Node 20.
+- **Deploy fails: no entry point** — confirm `wrangler.jsonc` is committed and `assets.directory` is `./dist`.
+- **Build fails on image download** — build needs network access (default on Cloudflare).
+- **Node version** — `.node-version` pins Node 20.

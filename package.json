@@ -5,10 +5,14 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "dev": "npx serve dist",
-    "verify": "node scripts/verify-links.mjs"
+    "verify": "node scripts/verify-links.mjs",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "cheerio": "^1.0.0",
     "csv-parse": "^5.6.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.60.0"
   }
 }
